@@ -1,0 +1,140 @@
+package pack1;
+
+import java.util.Scanner;
+class WarningMsg{
+	public int numLimit(int number) {
+		Scanner sc=new Scanner(System.in);
+		loop :while(number<=0||number>=10) {
+			System.out.println("Please Enter the Number between 0 to 10 :");
+			number = sc.nextInt();
+			if(number>=0&&number<=10) {
+				break;
+			}else {
+				continue loop;
+			}
+		}
+		return number;
+	}
+	
+	public int playerLimit(int number) {
+		Scanner sc=new Scanner(System.in);
+		loop :while(number<2||number>20) {
+			System.out.println("Please Enter the Player Count between 2 to 20 :");
+			number = sc.nextInt();
+			if(number>=2&&number<=20) {
+				break;
+			}else {
+				continue loop;
+			}
+		}
+		return number;
+	}
+	
+}
+class Gesser {
+	int gesserNum;
+	public int getGesserNum() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please Enter Gesser Number");
+		gesserNum = sc.nextInt();
+		gesserNum = new WarningMsg().numLimit(gesserNum);	
+		return gesserNum;
+		
+	}	
+}
+class Player{
+	int playerNum;
+	public int getPlayerNum() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please Enter Player Number");
+		playerNum=	sc.nextInt();
+		playerNum = new WarningMsg().numLimit(playerNum);
+		return playerNum;
+	}
+}
+class PlayerName{
+	String playerName;
+	public String getPlayerName() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please Enter Player Name");
+		playerName=sc.nextLine();
+		return playerName;
+	}
+}
+class Umpire {
+	int gessNum;
+	public int getDataSizeInArray(int arr[]) {
+		int count=0;
+		for(int a:arr) if(a!=0)
+			count++;
+		return count;
+	}
+	public void compare() {
+		Player[] player;
+		PlayerName[] name ;
+	     int mt,unmt;
+
+		do{
+			mt=0;unmt=0;
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter Palyer Count :");
+			int input = sc.nextInt();
+			input = new WarningMsg().playerLimit(input);
+			
+			name = new PlayerName[input];
+			String[] plyName=new String[input];
+			
+			player =new Player[input];
+			int[] playerValue=new int[input];
+			int[] matchedPlayer=new int[input];
+			int[] unMatchedPlayer=new int[input]; 
+			
+			gessNum =new Gesser().getGesserNum();
+			
+			for(int k=0;k<player.length;k++) {
+				
+				name[k] =new PlayerName();
+				plyName[k] = name[k].getPlayerName();
+
+				player[k]=new Player();
+				playerValue[k] = player[k].getPlayerNum();
+				
+				if(gessNum==playerValue[k]) {
+					
+					int a=k+1;                               
+					matchedPlayer[mt]=a;
+					mt++;                                    
+				}
+				if(gessNum!=playerValue[k]){
+					int b=k+1;
+					unMatchedPlayer[unmt]=b; 
+					unmt++;                  
+				}
+			}
+
+			int matCount = getDataSizeInArray(matchedPlayer);
+			System.out.println("Matched Player Count >"+matCount);
+			int unmatCount = getDataSizeInArray(unMatchedPlayer);
+			System.out.println("UnMatched Player Count >"+unmatCount);
+			
+			if(unmatCount>=1) 
+				for(int s=0;s<unmatCount;s++) 
+					System.out.println(plyName[(unMatchedPlayer[s])-1]+" lost the Game");
+
+			if(matCount>=1) 
+				for(int r=0;r<matCount;r++) 
+					System.out.println(plyName[(matchedPlayer[r])-1]+" Won the Game");
+				
+			if(player.length==unmt) 
+				System.out.println("All Players lost Please Play Again....");
+			
+		}while(player.length==unmt);
+	}
+}
+public class Game {
+
+	public static void main(String[] args) {
+	new Umpire().compare();
+	}
+
+}

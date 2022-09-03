@@ -1,0 +1,193 @@
+1.WAP to reverse a String.
+
+public class ReverseStringEx {
+
+	public static void main(String[] args) {
+		String text1="iNeuron";
+		String text2="";
+
+		for(int i=text1.length()-1;i>=0;i--) {
+			text2=text2+text1.charAt(i);
+		}
+		System.out.println("Reverse String : "+text2);
+	}
+}
+
+2. WAP to reverse a sentence while preserving the position.
+
+public class StringReverseWhilePreservingPosition {
+
+	public static void main(String[] args) {
+		String word="Think Twice";
+		String[] splitword=word.split(" ");
+		String result="", temp="";
+		for(int i=0;i<splitword.length;i++) {
+			for(int j=splitword[i].length()-1;j>=0;j--) {
+				temp=temp+splitword[i].charAt(j);
+			}
+			temp=temp+" ";
+			result=temp; 
+		}
+		System.out.println(result);
+	}
+}
+
+3. WAP to check if the String is Anagram or not.
+
+public class AnagramEx {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		String text1=sc.nextLine();
+		String text2=sc.nextLine();
+		String word1 = text1.replaceAll("\\s", "");
+		String word2 = text2.replaceAll("\\s", "");
+		boolean status=true;
+		if(word1.length()!=word2.length()) status=false;
+		
+		else {
+			char[] charArr1 = word1.toLowerCase().toCharArray();
+			char[] charArr2 = word2.toLowerCase().toCharArray();
+			Arrays.sort(charArr1);
+			Arrays.sort(charArr2);
+			status = Arrays.equals(charArr1, charArr2);
+		}
+		if(status) 
+		
+		System.out.println(text1+" and "+text2+" are Anagram");
+		
+		System.out.println(text1+" and "+text2+" are not Anagram");
+	}
+}
+
+4. WAP to check if the String is a Pangram or not.
+
+public class PangramEx {
+	static int size = 26;  
+	static boolean isLetter(char ch)  
+	{  
+		if (!Character.isLetter(ch))  
+			return false;  
+		return true;  
+	}  
+	static boolean containsAllChars(String text)  
+	{  
+		int len = text.length();
+		text = text.toLowerCase();  
+		boolean[] present = new boolean[size];  
+		for (int i = 0; i < len; i++)   
+		{  
+			if (isLetter(text.charAt(i)))   
+			{  
+				int letter = text.charAt(i) - 'a';  
+				present[letter] = true;  
+			}  
+		}  
+		for (int i = 0; i < size; i++)   
+		{  
+			if (!present[i])  
+				return false;  
+		}  
+		return true;  
+	}  
+	public static void main(String args[])  
+	{  
+		Scanner sc=new Scanner(System.in);
+		String text=sc.nextLine();
+
+		if (containsAllChars(text))  
+			System.out.println("The given string is a pangram string.");  
+		else  
+			System.out.println("The given string is not a pangram string.");  
+	}  
+}
+
+5. WAP to print repeatedly occurring characters in the given String.
+
+public class RepeatedlyOccurringCharacters {
+
+	public static void main(String[] args) {
+
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter the word :");
+		String str=  sc.nextLine();
+		char string[] = str.toCharArray();  
+		int count;  
+		System.out.println("Repeatedly Occurring Characters :");  
+		for(int i = 0; i <string.length; i++) {  
+			count = 1;  
+			for(int j = i+1; j <string.length; j++) {  
+				if(string[i] == string[j] && string[i] != ' ') {  
+					count++;  
+					string[j] = '0';  
+				}  
+			}  
+			if(count > 1&& string[i] != '0')  
+				System.out.print(string[i]);  
+		}  
+		
+	}  
+}
+
+6.WAP to sort a String Alphabetically.
+
+public class SortAlphabetsEx {
+
+	public static void main(String[] args) {
+		System.out.println("Please enter the Alphabets :");
+		 String  text=  new Scanner(System.in).nextLine();
+		 
+	        char arr[] = text.toCharArray();
+	       
+	        char temp;
+	 
+	        int i = 0;
+	        while (i < arr.length) {
+	            int j = i + 1;
+	            while (j < arr.length) {
+	                if (arr[j] < arr[i]) {
+	                   
+	                    temp = arr[i];
+	                    arr[i] = arr[j];
+	                    arr[j] = temp;
+	                }
+	                j += 1;
+	            }
+	            i += 1;
+	        }
+	 
+	        System.out.println(arr);
+	    }
+}
+
+7. WAP to count the number of Vowels and Consonants of a String value.
+8. WAP to count number of special characters
+
+public class VowelsConsonantSpecialCharCounts {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please Enter the Value :");
+		String text1=sc.nextLine();
+		int vowelsCount=0,consCount=0,specialCharCount=0;
+		String text=text1.toLowerCase();
+
+		for(int i=0;i<text.length();i++) {
+			char c=text.charAt(i);
+			if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u') {
+				vowelsCount++;
+			}
+			else if(c>='a'&&c<='z') {
+				consCount++;
+			}
+			else if (!(c>='0'&&c<='9'&&c==' ')) {
+				specialCharCount++;
+			}
+		}
+		System.out.println("Vowels Count :"+vowelsCount);
+		System.out.println("Consonants Count :"+consCount);
+		System.out.println("Special Character Count :"+specialCharCount);
+		
+	}
+}
+
